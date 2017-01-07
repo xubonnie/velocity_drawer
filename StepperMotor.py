@@ -43,9 +43,9 @@ myStepper = mh.getStepper(200, 1)       # 200 steps/rev, motor port #1
 
 
 
-myStepper.setSpeed(30)                  # 30 RPM
+myStepper.setSpeed(60)                  # 30 RPM
 
-myStepper.step(400, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.DOUBLE)
+myStepper.step(800, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.DOUBLE)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #***JSON***
