@@ -6,7 +6,7 @@ camera = PiCamera()
 
 camera.start_preview()
 sleep(5)
-camera.capture('/home/pi/smartdrawer/item.jpg')
+camera.capture('/home/pi/velocity_drawer/item.jpg')
 camera.stop_preview()
 
 subprocess.call(['python','identify.py','item.jpg'])

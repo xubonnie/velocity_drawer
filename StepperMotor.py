@@ -41,17 +41,11 @@ end = int(sys.argv[2])
 
 diff = start - end
 
-<<<<<<< HEAD
 if diff < 0 :
     myStepper.step(abs(diff)*90, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.DOUBLE)
 else:
     myStepper.step(abs(diff)*90, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
 
-=======
-myStepper.setSpeed(60)                  # 30 RPM
-
-myStepper.step(800, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.DOUBLE)
->>>>>>> 1436b9b09fe925d00844367f7e969d6345fc2956
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #***JSON***

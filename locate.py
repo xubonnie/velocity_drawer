@@ -26,8 +26,8 @@ try:
 	c.execute('SELECT location FROM items WHERE item_name=:item',{"item": itemName})
 	loc = c.fetchone()
 	print loc
-	c.execute('SELECT location FROM items WHERE item_name="location ";')
-	drawer_loc = c.fethone()
+	c.execute('SELECT location FROM items WHERE item_name="curr_location ";')
+	drawer_loc = c.fetchone()
 
 except sqlite3.Error, e:
 	print 'Error %s' % e.args[0]
@@ -44,12 +44,13 @@ if (not(loc == None)):
 	subprocess.call(['aplay', 'sound/located.wav'])
 	#update database to reflect new location
 	try:
-                c.execute('UPDATE items SET location=(?) WHERE item_name="curr_location ";',(loc))
+                c.execute('UPDATE items SET location=? WHERE item_name="curr_location ";',(loc,))
+		db.commit()
         except sqlite3.Error, e:
                 print 'Error %s' % e.args[0]
 
 	#delay
-	subprocess.call(['python','StepperMotor.py',drawer_loc,loc])
+	#subprocess.call(['python','StepperMotor.py',drawer_loc,loc])
 	#update database to reflect new location
 	#try:
 	#	c.execute('UPDATE items SET location=(?) WHERE item_name="curr_location ";',(loc))
