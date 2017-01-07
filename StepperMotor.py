@@ -1,3 +1,14 @@
+#Simply run the following commands from an appropriate location (ex. "/home/pi"):
+#  git clone https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
+#  cd Adafruit-Motor-HAT-Python-Library
+
+#Install python-dev if you havent already:
+#  sudo apt-get install python-dev
+
+#Now install it with the setup install command:
+#  sudo python setup.py install
+
+
 #IMPORTS
 #!/usr/bin/python
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
