@@ -33,7 +33,7 @@ myStepper = mh.getStepper(100, 1)       # 200 steps/rev, motor port #1
 
 
 
-myStepper.setSpeed(90)                  # 30 RPM
+myStepper.setSpeed(30)                  # 30 RPM
 
 
 start = int(sys.argv[1])

@@ -29,7 +29,7 @@ item_name = status['name']
 phrase = 'identified item, ' + item_name
 subprocess.call(['pico2wave','-w','sound/identified.wav',phrase])
 subprocess.call(['aplay','sound/identified.wav'])
-
+subprocess.call(['aplay','sound/put_item.wav'])
 # insert item into database
 # table is called 'items', with columns item_name and location
 
