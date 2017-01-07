@@ -10,6 +10,7 @@ import json
 import time
 import threading
 import os
+import sys
 
 #~~~~~~~~~~~~~~~~~~SETUP OF MOTOR~~~~~~~~~~~~~~~~~~~
 
@@ -35,8 +36,8 @@ myStepper = mh.getStepper(360, 1)       # 200 steps/rev, motor port #1
 myStepper.setSpeed(90)                  # 30 RPM
 
 
-start = int(raw_input())
-end = int(raw_input())
+start = int(sys.argv[1])
+end = int(sys.argv[2])
 
 diff = start - end
 
