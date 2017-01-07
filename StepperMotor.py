@@ -42,9 +42,9 @@ end = int(sys.argv[2])
 diff = start - end
 
 if diff < 0 :
-    myStepper.step(abs(diff)*25, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.DOUBLE)
+    myStepper.step((abs(diff)+1)*25), Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.DOUBLE)
 else:
-    myStepper.step(abs(diff)*25, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
+    myStepper.step((abs(diff)+1)*25), Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
