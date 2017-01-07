@@ -3,21 +3,28 @@ import subprocess
 import requests
 from requests.utils import quote
 import sqlite3
+import cloudsight
+import json
 
 db = None
+auth = cloudsight.SimpleAuth('E_Q05SUR2NPl-PTTOr-crg')
+api = cloudsight.API(auth)
 
 subprocess.call(['aplay','sound/please_wait.wav'])
 
-URL = "https://visual-recognition-demo.mybluemix.net/api/classify"
-img_name = sys.argv[1]
-files = {'images_file':open(img_name,'rb')} #modes r and b are for read and binary
-r = requests.post(URL, files=files)
+with open('item.jpg', 'rb') as f:
+    response = api.image_request(f, 'your-file.jpg', {
+        'image_request[locale]': 'en-US',
+    })
 
-find_string = ':"'
-start = r.text.find(find_string) + len(find_string)
-item_name = r.text[start:(r.text.find('"',start))]
-#print(r.text)
-#print(item_name)
+status = api.image_response(response['token'])
+if status['status'] != cloudsight.STATUS_NOT_COMPLETED:
+    # Done!
+    pass
+
+status = api.wait(response['token'], timeout=30)
+
+item_name = status['name']
 
 phrase = 'identified item, ' + item_name
 subprocess.call(['pico2wave','-w','sound/identified.wav',phrase])
@@ -36,3 +43,8 @@ try:
 except sqlite3.Error, e:
 	print 'Error %s' % e.args[0]
 	sys.exit(1)
+
+
+
+
+
