@@ -13,7 +13,14 @@ try:
     item_list = c.fetchall()
 except sqlite3.Error, e:
     print 'Error %s' % e.args[0]
-	sys.exit(1) 
+    sys.exit(1) 
 
+item_list_string = ""
+print item_list[0]
 for item in item_list:
-    print item
+    start = 3
+    end = len(str(item))-4
+    item_list_string = item_list_string + (str(item))[start:end] + ". "
+    print item_list_string
+print item_list_string 
+
