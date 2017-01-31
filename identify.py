@@ -45,10 +45,21 @@ except sqlite3.Error, e:
 
 #Check if we have an empty spot
 empty_spot= -1
-full_spots = [i[1] for i in drawer_locs if i[0] is not 'curr_location ']
-curr_location = [i[1] for i in drawer_locs if i[0] is 'curr_location '][0]
+
+full_spots = [i[1] for i in drawer_locs if str(i[0]) not in 'curr_location ']
+print drawer_locs
+print full_spots
+
+curr_location = -1
+for i in drawer_locs:
+    if 'curr_location' in str(i[0]):
+	curr_location=i[1]
+
+if curr_location <= 0:
+    print "Error"
+
 for i in range(1,5):
-    if i is not in full_spots:
+    if i not in full_spots:
         empty_spot=i;
         break;
 
@@ -59,14 +70,16 @@ if empty_spot > 0:
             db = sqlite3.connect('inventory.db')
             c = db.cursor()
             c.execute('INSERT INTO items (item_name,location) VALUES (?,?);',(item_name,empty_spot))
+	    c.execute('UPDATE items SET location={} WHERE item_name="curr_location "'.format(empty_spot))
             db.commit()
     except sqlite3.Error, e:
             print 'Error from inserting new item into db %s' % e.args[0]
             sys.exit(1)
     #Spin to new spot and tell person to put in
-    subprocess.call(['StepperMotor.py', curr_location, empty_spot]) 
+    print ("curr_location:{} empty_spot:{}".format(curr_location, empty_spot)) 
+    subprocess.call(['python','StepperMotor.py', str(curr_location), str(empty_spot)]) 
     subprocess.call(['aplay','sound/put_item.wav'])    
 else:
     #sorry we are full
-    print("Sorry we are full, please take something out")
+    subprocess.call(['aplay','sound/sorry_full.wav'])
     sys.exit(0)
